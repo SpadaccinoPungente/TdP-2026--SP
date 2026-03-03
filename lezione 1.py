@@ -1,3 +1,5 @@
+"""
+# LEZIONE 1:
 # Scriviamo un codice python che modelli un semplice
 # gestionale aziendale. Dovremo prevedere la possibilità di
 # definire entità che modellano i prodotti, i clienti,
@@ -73,3 +75,70 @@ class Cliente:
 
 c1 = Cliente("Mario Bianchi", "mario.bianchi@polito.it", "Gold")
 print(c1.descrizione())
+"""
+
+# Scriviamo un codice python che modelli un semplice
+# gestionale aziendale. Dovremo prevedere la possibilità di
+# definire entità che modellano i prodotti, i clienti,
+# offrire interfacce per calcolare i prezzi, eventualmente
+# scontati, ...
+
+from gestionale.vendite.ordini import Ordine, RigaOrdine, OrdineConSconto
+from gestionale.core.prodotti import Prodotto, crea_prodotto_standard, ProdottoRecord
+from gestionale.core.clienti import Cliente, ClienteRecord
+
+print("===============================================================================================================")
+
+p1 = Prodotto("Ebook Reader", 120.0, 1, "AAA")
+p2 = crea_prodotto_standard("Tablet", 750)
+print(p1)
+print(p2)
+
+"""
+# modi per importare:
+# 1)
+from prodotti import ProdottoScontato
+# 2)
+from prodotti import ProdottoScontato as ps # rinomina la classe
+p3 = ps("Auricolari", 230, 1, "ABC", 10)
+# 3)
+import prodotti # mi importa tutto ciò che c'è in prodotti
+p4 = prodotti.ProdottoScontato("Auricolari", 230, 1, "ABC", 10)
+# 4)
+import prodotti as p # posso rinominarlo
+p5 = p.ProdottoScontato("Auricolari", 230, 1, "ABC", 10)
+"""
+
+print("===============================================================================================================")
+
+c1 = Cliente("Mario Rossi", "mail@gmail.com", "Gold")
+
+print("---------------------------------------------------------------------------------------------------------------")
+
+cliente1 = ClienteRecord("Mario Rossi", "mariorossi@example.com", "Gold")
+p1 = ProdottoRecord("Laptop", 1200)
+p2 = ProdottoRecord("Mouse", 20)
+
+ordine = Ordine([RigaOrdine(p1, 2), RigaOrdine(p2, 10)], cliente1)
+ordine_scontato = OrdineConSconto([RigaOrdine(p1, 2), RigaOrdine(p2, 10)], cliente1, 0.1) # parametri passati con ordine
+
+print(ordine) # dataclass scrive automaticamente un __repr__ che è quello che viene mostrato
+print("Numero di righe nell'ordine: ", ordine.numero_righe())
+print("Totale netto: ", ordine.totale_netto())
+print("Totale lordo (IVA 22%): ", ordine.totale_lordo(0.22))
+
+print(ordine_scontato)
+print("Totale netto scontato: ", ordine_scontato.totale_netto())
+print("Totale lordo scontato: ", ordine_scontato.totale_lordo(0.22))
+# totale_lordo() non esiste in OrdineConSconto, ma è definito in Ordine e richiama l'implementazione della super classe
+
+print("---------------------------------------------------------------------------------------------------------------")
+
+# Codice lungo ma che "fa poco" --> voglio suddividerlo in più file --> uso i moduli! Collezioni di classi, funzioni, variabili, ...
+# Stesso modo in cui funzionano le librerie, o moduli tipo dataclass
+# possono essere propri o pubblici scaricati
+
+# da farsi poi mercoledì 4/3:
+# nel package gestionale, scriviamo un modulo fatture.py che contenga:
+# - una classe Fattura che contiene un Ordine, un numero fattura e una data
+# - un metodo genera_fattura() che restituisce una stringa formattata con tutte le info della fattura
