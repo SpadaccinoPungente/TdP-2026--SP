@@ -36,8 +36,8 @@ class Prodotto:
         return lordo
 
     @classmethod # decoratore, messo così prima di un metodo lo rende metodo di classe e non d'istanza (lo creo una volta sola, singleton?)
-    def costruttore_con_quantità_uno(cls, name: str, price: float, supplier: str):
-        cls(name, price, 1, supplier) # cls riferimento alla classe, sto richimando __init__()
+    def costruttore_con_quantita_uno(cls, name: str, price: float, supplier: str):
+        cls(name, price, 1, supplier) # cls riferimento alla classe, sto richiamando __init__()
 
     @staticmethod # metodo statico
     def applica_sconto(prezzo, percentuale): # essendo metodo statico non passo né self nè cls!
@@ -50,8 +50,8 @@ myproduct1 = Prodotto(name = "Laptop", price = 1200.0, quantity=12, supplier="AB
 print(f"Nome prodotto: {myproduct1.name} - prezzo: {myproduct1.price}")
 
 print(f"Il totale lordo di myproduct1 è {myproduct1.valore_lordo()}") # uso un metodo di istanza
-p3 = Prodotto.costruttore_con_quantità_uno("Auricolari", 200.0, "ABC") # modo per chiamare un metodo di classe.
-print(f"Prezzo scontato di myproduct1 {Prodotto.applica_sconto(myproduct1.price, 0.15)}")# modo per chiamare un metodo statico.
+p3 = Prodotto.costruttore_con_quantita_uno("Auricolari", 200.0, "ABC") # modo per chiamare un metodo di classe
+print(f"Prezzo scontato di myproduct1 {Prodotto.applica_sconto(myproduct1.price, 0.15)}") # modo per chiamare un metodo statico
 
 myproduct2 = Prodotto("Mouse", 10, 25, "CDE")
 print(f"Nome prodotto: {myproduct2.name} - prezzo: {myproduct2.price}")
