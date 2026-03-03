@@ -1,5 +1,5 @@
 # Scriviamo un codice python che modelli un semplice
-# gestionale aziendale. Dovremo prvedere la possibilità di
+# gestionale aziendale. Dovremo prevedere la possibilità di
 # definire entità che modellano i prodotti, i clienti,
 # offrire interfacce per calcolare i prezzi, eventualmente
 # scontati, ...
@@ -23,7 +23,7 @@ class Prodotto:
         return lordo
 
     @classmethod
-    def costruttore_con_quantità_uno(cls, name: str, price: float, supplier: str):
+    def costruttore_con_quantita_uno(cls, name: str, price: float, supplier: str):
         cls(name, price, 1, supplier)
 
     @staticmethod
@@ -47,7 +47,7 @@ print(f"Nome prodotto: {myproduct1.name} - prezzo: {myproduct1.price}")
 
 print(f"Il totale lordo di myproduct1 è {myproduct1.valore_lordo()}") #uso un metodo di istanza
 
-p3 = Prodotto.costruttore_con_quantità_uno("Auricolari", 200.0, "ABC") # modo per chiamare un metodo di classe
+p3 = Prodotto.costruttore_con_quantita_uno("Auricolari", 200.0, "ABC") # modo per chiamare un metodo di classe
 
 print(f"Prezzo scontato di myproduct1 {Prodotto.applica_sconto(myproduct1.price, 0.15)}")# modo per chiamare un metodo statico.
 
