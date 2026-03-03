@@ -33,7 +33,7 @@ class Prodotto:
     @property
     def price(self): # eq. getter
         return self._price
-    @price.setter # posso crearlo solo una volta definito property, si attiva quando scrivo myvar.price = val
+    @price.setter # posso crearlo solo una volta definito property, si attiva quando scrivo self.price = val
     def price(self, valore):
         if valore < 0:
             raise ValueError("Attenzione, il prezzo non può essere negativo.")
